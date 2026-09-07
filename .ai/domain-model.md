@@ -70,4 +70,19 @@ you've drifted.
 
 Short entries as you build — not documentation, just the call and the reason:
 
-- We chose ___ because ___.
+- Can `message` be empty? Nej, antingen förvalt eller eget meddelande. För att det blir för vagt och tar bort sytet av en hyllning.
+- Whitespace only? Nej, det behöver finnas ett meddelande av något slag. För att det blir för vagt och tar bort sytet av en hyllning att inte ha ett meddelande till.
+- Very long? Längden beror på utseende, men inte för lång.
+- What does the feed show when it's empty? ett informativt meddelande. För att det underlättar agerande för användaren.
+
+- Does anything survive a page refresh — and if so, how?
+För att skydda användarens arbete vid refresh bör poster sparas som minst i localStorage. Eventuellt Cookies.
+- If a kudos references a colleague no longer in the list, what happens?
+(Eventuellt markera raden/användaren). Ingenting händer i första stadiet då inlägg redan finns. För att hålla kvar en historik och för att det är den enklaste lösningen med tanke på tidsramar.
+- Where does validation live, and is it in one place or several?
+Både individuellt per fält och en för hela posten innan man skickar. Samt för radering av en befintlig post. För att det är en bra standard.
+- How do you keep things fast as the feed grows — recompute on every render,
+  or keep a running total somewhere?
+Paus  
+
+We chose ___ because ___.

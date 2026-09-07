@@ -12,7 +12,10 @@ for the shape — no backend, and the stack is already picked for you.
 Then write down, separately:
 
 1. **Questions** you have.
+- Menas 'closed set' att både kategori-namnet och beskrivningen ska visas för en post eller är beskrivningen en förklaring för oss utvecklare?
+
 2. **Assumptions** you're making instead of asking.
+- Kan förklaring av kategori fyllas i som text och sedan lämna utrymme för användaren att fylla i en egen text?
 3. **What's already decided** — the product rules and fixed fields in
    `.ai/domain-model.md`, so you don't reopen them.
 
