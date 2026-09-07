@@ -73,6 +73,7 @@ Short entries as you build — not documentation, just the call and the reason:
 - Can `message` be empty? Nej, antingen förvalt eller eget meddelande. För att det blir för vagt och tar bort sytet av en hyllning.
 - Whitespace only? Nej, det behöver finnas ett meddelande av något slag. För att det blir för vagt och tar bort sytet av en hyllning att inte ha ett meddelande till.
 - Very long? Längden beror på utseende, men inte för lång.
+  Send-form implementation: maximum 500 characters, enforced in the field and before sending, to keep kudos short. Leading and trailing whitespace is trimmed when saved.
 - What does the feed show when it's empty? ett informativt meddelande. För att det underlättar agerande för användaren.
 
 - Does anything survive a page refresh — and if so, how?
