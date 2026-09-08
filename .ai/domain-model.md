@@ -116,4 +116,4 @@ The following decisions are now reflected in the implementation:
   Kudos that may have been sent from another browser tab.
 - The visible feed and overview have not been implemented yet. The decisions
   about an empty feed, the seven-day overview and overview sorting therefore
-  remain future work.
+  remain future work..
