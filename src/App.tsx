@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { colleagues } from './kudos'
+import KudosFeed from './kudos-feed/KudosFeed'
 import SendKudosForm from './send-kudos/SendKudosForm'
 import { useKudos } from './useKudos'
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(colleagues[0].id)
-  const { addKudos } = useKudos()
+  const { kudos, addKudos } = useKudos()
 
   return (
     <main>
@@ -26,6 +27,7 @@ function App() {
         </div>
         <SendKudosForm currentUserId={currentUserId} onSend={addKudos} />
       </section>
+      <KudosFeed kudos={kudos} />
     </main>
   )
 }
