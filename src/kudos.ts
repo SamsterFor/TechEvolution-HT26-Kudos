@@ -64,3 +64,15 @@ export function createKudos(draft: KudosDraft): Kudos {
     createdAt: new Date().toISOString(),
   }
 }
+
+export function updateKudos(kudos: Kudos, draft: KudosDraft): Kudos {
+  if (Object.values(validateKudos(draft)).some(Boolean) || !isCategory(draft.category)) {
+    throw new Error('Please check the form before saving.')
+  }
+  return {
+    ...kudos,
+    ...draft,
+    message: draft.message.trim(),
+    category: draft.category,
+  }
+}

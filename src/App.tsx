@@ -6,7 +6,7 @@ import { useKudos } from './useKudos'
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(colleagues[0].id)
-  const { kudos, addKudos } = useKudos()
+  const { kudos, addKudos, updateKudos, deleteKudos } = useKudos()
 
   return (
     <main>
@@ -27,7 +27,7 @@ function App() {
         </div>
         <SendKudosForm currentUserId={currentUserId} onSend={addKudos} />
       </section>
-      <KudosFeed kudos={kudos} />
+      <KudosFeed kudos={kudos} onUpdate={updateKudos} onDelete={deleteKudos} />
     </main>
   )
 }

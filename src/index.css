@@ -44,6 +44,13 @@ section[aria-label="Kudos feed"] article { padding: 20px 0; border-top: 1px soli
 section[aria-label="Kudos feed"] article p { margin: 0 0 10px; }
 section[aria-label="Kudos feed"] article p:last-child { margin-bottom: 0; color: var(--muted); font-size: 0.9rem; }
 section[aria-label="Kudos feed"] article span { display: inline-block; padding: 3px 8px; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
+.feed-actions, .edit-actions { display: flex; align-items: center; gap: 12px; }
+.feed-actions { margin-top: 16px; }
+.feed-actions button, .edit-actions button { width: auto; margin-top: 0; padding: 8px 12px; font-size: 0.85rem; }
+.secondary-button { border: 1px solid var(--ink); background: var(--surface); color: var(--ink); }
+.secondary-button:hover { background: var(--line); }
+.text-button { border-color: transparent; background: transparent; color: var(--muted); }
+.text-button:hover { background: transparent; color: var(--danger); }
 @media (max-width: 420px) {
   main { padding: 36px 16px 56px; }
   .card { padding: 20px; box-shadow: 5px 5px 0 var(--accent); }

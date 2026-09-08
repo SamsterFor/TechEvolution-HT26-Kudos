@@ -42,7 +42,10 @@ From the brief. Build them as specified.
 
 - **Self-kudos are a feature, not a bug.** People under-report their own
   wins. Posting a kudos to yourself is allowed, and it appears like any other. No need to bring this up, the developers are aware of it.
-- **A kudos is immutable once sent.** No editing.
+- **A Kudos can be edited after it is sent.** Editing changes the recipient,
+  message or category, but keeps the original ID and creation timestamp.
+- **A Kudos can be deleted from the feed.** Deletion requires confirmation and
+  removes the record from browser storage.
 - **The feed is newest first.** Always.
 - **No limit on how many kudos one person can send.**
 
@@ -62,8 +65,8 @@ each one, or log it under Decisions below.
 
 ## Deliberately out of scope
 
-Authentication. A backend. A database. Notifications. Editing a sent kudos.
-Comment threads. Rich text. Image uploads. If you're building any of these,
+Authentication. A backend. A database. Notifications. Comment threads. Rich
+text. Image uploads. If you're building any of these,
 you've drifted.
 
 ## Decisions
@@ -112,6 +115,11 @@ The following decisions are now reflected in the implementation:
   not match the Kudos model are treated as invalid storage.
 - Stored Kudos are sorted newest first. Sorting is performed on a copy so the
   loaded array is not mutated.
+- Sent Kudos can be edited from the feed. Edits reuse the shared validation,
+  preserve the original ID and creation timestamp, and are saved to
+  `localStorage`.
+- Sent Kudos can be deleted from the feed after a confirmation. The deleted
+  record is removed from `localStorage`.
 - `localStorage` is read again before saving a new Kudos. This helps preserve
   Kudos that may have been sent from another browser tab.
 - The visible feed and overview have not been implemented yet. The decisions

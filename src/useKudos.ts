@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createKudos, isKudos } from './kudos'
+import { createKudos, isKudos, updateKudos as updateKudosRecord } from './kudos'
 import type { Kudos, KudosDraft } from './kudos'
 
 export const KUDOS_STORAGE_KEY = 'kudos'
@@ -25,6 +25,12 @@ function readKudos(): Kudos[] {
   return sortNewestFirst(stored)
 }
 
+function writeKudos(kudos: Kudos[]) {
+  const sortedKudos = sortNewestFirst(kudos)
+  localStorage.setItem(KUDOS_STORAGE_KEY, JSON.stringify(sortedKudos))
+  return sortedKudos
+}
+
 export function useKudos() {
   const [kudos, setKudos] = useState<Kudos[]>(() => {
     try {
@@ -37,10 +43,26 @@ export function useKudos() {
   function addKudos(draft: KudosDraft) {
     const newKudos = createKudos(draft)
     // Read before writing to retain kudos sent from another tab.
-    const nextKudos = [newKudos, ...readKudos()]
-    localStorage.setItem(KUDOS_STORAGE_KEY, JSON.stringify(sortNewestFirst(nextKudos)))
-    setKudos(sortNewestFirst(nextKudos))
+    setKudos(writeKudos([newKudos, ...readKudos()]))
   }
 
-  return { kudos, addKudos }
+  function updateKudos(id: string, draft: KudosDraft) {
+    const storedKudos = readKudos()
+    const existingKudos = storedKudos.find((kudo) => kudo.id === id)
+    if (!existingKudos) throw new Error('Kudos could not be found.')
+
+    const updatedKudos = updateKudosRecord(existingKudos, draft)
+    setKudos(writeKudos(storedKudos.map((kudo) => kudo.id === id ? updatedKudos : kudo)))
+  }
+
+  function deleteKudos(id: string) {
+    const storedKudos = readKudos()
+    if (!storedKudos.some((kudo) => kudo.id === id)) {
+      throw new Error('Kudos could not be found.')
+    }
+
+    setKudos(writeKudos(storedKudos.filter((kudo) => kudo.id !== id)))
+  }
+
+  return { kudos, addKudos, updateKudos, deleteKudos }
 }
