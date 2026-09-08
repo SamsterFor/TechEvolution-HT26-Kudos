@@ -28,6 +28,17 @@ export function isCategory(value: string): value is Category {
   return Object.hasOwn(categories, value)
 }
 
+export function isKudos(value: unknown): value is Kudos {
+  if (!value || typeof value !== 'object') return false
+  const kudos = value as Record<string, unknown>
+  return typeof kudos.id === 'string' && kudos.id.length > 0 &&
+    typeof kudos.from === 'string' && kudos.from.length > 0 &&
+    typeof kudos.to === 'string' && kudos.to.length > 0 &&
+    typeof kudos.message === 'string' && Boolean(kudos.message.trim()) &&
+    typeof kudos.category === 'string' && isCategory(kudos.category) &&
+    typeof kudos.createdAt === 'string' && Number.isFinite(Date.parse(kudos.createdAt))
+}
+
 export function validateKudos(draft: KudosDraft) {
   return {
     from: colleagues.some(({ id }) => id === draft.from) ? '' : 'Choose who is sending.',

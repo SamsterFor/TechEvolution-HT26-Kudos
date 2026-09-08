@@ -1,20 +1,28 @@
 import { useState } from 'react'
-import { createKudos, isCategory } from './kudos'
+import { createKudos, isKudos } from './kudos'
 import type { Kudos, KudosDraft } from './kudos'
 
-const STORAGE_KEY = 'kudos'
+export const KUDOS_STORAGE_KEY = 'kudos'
+
+function sortNewestFirst(kudos: Kudos[]): Kudos[] {
+  return [...kudos].sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+}
 
 function readKudos(): Kudos[] {
-  const stored: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]')
-  if (!Array.isArray(stored) || !stored.every((kudos) =>
-    kudos && typeof kudos.id === 'string' && typeof kudos.from === 'string' &&
-    typeof kudos.to === 'string' && typeof kudos.message === 'string' &&
-    typeof kudos.category === 'string' && isCategory(kudos.category) &&
-    typeof kudos.createdAt === 'string' && Number.isFinite(Date.parse(kudos.createdAt)),
-  )) {
+  const raw = localStorage.getItem(KUDOS_STORAGE_KEY)
+  if (raw === null) return []
+
+  let stored: unknown
+  try {
+    stored = JSON.parse(raw)
+  } catch {
     throw new Error('Saved kudos could not be read.')
   }
-  return stored.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+
+  if (!Array.isArray(stored) || !stored.every(isKudos)) {
+    throw new Error('Saved kudos could not be read.')
+  }
+  return sortNewestFirst(stored)
 }
 
 export function useKudos() {
@@ -30,8 +38,8 @@ export function useKudos() {
     const newKudos = createKudos(draft)
     // Read before writing to retain kudos sent from another tab.
     const nextKudos = [newKudos, ...readKudos()]
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextKudos))
-    setKudos(nextKudos)
+    localStorage.setItem(KUDOS_STORAGE_KEY, JSON.stringify(sortNewestFirst(nextKudos)))
+    setKudos(sortNewestFirst(nextKudos))
   }
 
   return { kudos, addKudos }
