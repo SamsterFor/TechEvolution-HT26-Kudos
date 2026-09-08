@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { colleagues } from './kudos'
-import SendKudosForm from './SendKudosForm'
+import SendKudosForm from './send-kudos/SendKudosForm'
 import { useKudos } from './useKudos'
 
 function App() {

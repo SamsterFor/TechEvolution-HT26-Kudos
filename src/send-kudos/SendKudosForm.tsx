@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { categories, colleagues, MAX_MESSAGE_LENGTH, validateKudos } from './kudos'
-import type { KudosDraft } from './kudos'
+import { categories, colleagues, MAX_MESSAGE_LENGTH, validateKudos } from '../kudos'
+import type { KudosDraft } from '../kudos'
 
 type Props = {
   currentUserId: string
