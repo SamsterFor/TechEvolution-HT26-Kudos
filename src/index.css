@@ -1,36 +1,50 @@
 :root {
-  font-family: system-ui, sans-serif;
-  color: #202c36;
-  background: #f3f6f5;
+  --ink: #17171a;
+  --muted: #5d6c7b;
+  --paper: #f5f5f7;
+  --surface: #fff;
+  --line: #e5e5e5;
+  --accent: #744059;
+  --accent-dark: #4828ff;
+  --danger: #e23939;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
   font-synthesis: none;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 * { box-sizing: border-box; }
-main { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
-h1 { margin: 8px 0; font-size: 2.25rem; letter-spacing: -0.04em; }
-header > p { color: #52615d; }
-.eyebrow { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.card { margin-top: 28px; padding: 28px; border: 1px solid #d6e0dc; border-radius: 16px; background: white; }
-.current-user { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid #d6e0dc; }
-label { display: block; margin-bottom: 8px; font-weight: 600; }
+body { margin: 0; }
+main { max-width: 720px; margin: 0 auto; padding: 56px 24px 72px; }
+header { margin-bottom: 32px; }
+h1, h2 { line-height: 1.05; letter-spacing: -0.04em; }
+h1 { max-width: 11ch; margin: 12px 0; font-size: clamp(2.5rem, 8vw, 4.5rem); }
+h2 { margin: 8px 0 0; font-size: 2rem; }
+header > p { color: var(--muted); }
+.eyebrow { margin: 0; color: var(--ink); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.card { margin-top: 28px; padding: 32px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); box-shadow: 8px 8px 0 var(--accent); }
+.current-user { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 700; }
 form label:not(:first-child) { margin-top: 20px; }
-select, textarea, button { width: 100%; font: inherit; border-radius: 8px; }
-select, textarea { padding: 12px; border: 1px solid #98aaa3; color: inherit; background: white; }
+select, textarea, button { width: 100%; font: inherit; border-radius: 2px; }
+select, textarea { padding: 13px 14px; border: 1px solid #ccc; color: inherit; background: var(--surface); }
 textarea { display: block; resize: vertical; }
-button { margin-top: 24px; padding: 12px; border: 0; background: #19644e; color: white; font-weight: 700; cursor: pointer; }
-button:hover { background: #124c3b; }
-:focus-visible { outline: 3px solid #31826c; outline-offset: 3px; }
-[aria-invalid="true"] { border-color: #ac2931; }
-.hint { margin: 6px 0 0; color: #52615d; font-size: 0.85rem; text-align: right; }
-.error { margin: 8px 0 0; color: #a0232c; font-size: 0.9rem; }
-.status { color: #19644e; margin-bottom: 0; }
+button { margin-top: 24px; padding: 14px 16px; border: 1px solid var(--ink); background: var(--accent); color: #fff; font-weight: 800; cursor: pointer; }
+button:hover { background: var(--accent-dark); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+[aria-invalid="true"] { border-color: var(--danger); }
+.hint { margin: 6px 0 0; color: var(--muted); font-size: 0.85rem; text-align: right; }
+.error { margin: 8px 0 0; color: var(--danger); font-size: 0.9rem; }
+.status { color: #0050bd; margin-bottom: 0; }
 .status:empty { margin: 0; }
+section[aria-label="Kudos feed"] { margin-top: 64px; }
+section[aria-label="Kudos feed"] > header { margin-bottom: 20px; }
+section[aria-label="Kudos feed"] article { padding: 20px 0; border-top: 1px solid var(--line); }
+section[aria-label="Kudos feed"] article p { margin: 0 0 10px; }
+section[aria-label="Kudos feed"] article p:last-child { margin-bottom: 0; color: var(--muted); font-size: 0.9rem; }
+section[aria-label="Kudos feed"] article span { display: inline-block; padding: 3px 8px; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
 @media (max-width: 420px) {
-  main { padding: 24px 16px; }
-  .card { padding: 20px; }
-}
-
-body {
-  margin: 0;
+  main { padding: 36px 16px 56px; }
+  .card { padding: 20px; box-shadow: 5px 5px 0 var(--accent); }
 }
