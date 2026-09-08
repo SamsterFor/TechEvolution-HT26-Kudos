@@ -87,3 +87,33 @@ Både individuellt per fält och en för hela posten innan man skickar. Samt fö
 Paus  
 
 We chose ___ because ___.
+
+### Implemented decisions
+
+The following decisions are now reflected in the implementation:
+
+- `message` cannot be empty or contain only whitespace. A Kudos should always
+  contain an actual message.
+- A message can contain a maximum of 500 characters. The limit is enforced
+  both by the form field and by validation before a Kudos is created.
+- Leading and trailing whitespace is trimmed before a Kudos is saved.
+- The sender and recipient are selected from `data/colleagues.json`. The app
+  stores colleague IDs rather than display names.
+- Categories are a closed set: `TEAMWORK`, `EXTRA_MILE`, `MENTORSHIP`, `CRAFT`
+  and `CUSTOMER_IMPACT`. Users cannot create custom categories.
+- A Kudos contains a sender, recipient, message, category, unique ID and
+  creation timestamp. The ID and timestamp are generated when the Kudos is
+  sent.
+- Validation is shared in `src/kudos.ts` through `validateKudos` and
+  `createKudos`. The form also displays field-level errors after interaction.
+- Sent Kudos are stored in browser `localStorage` under the key `kudos`. This
+  allows data to survive a page refresh without a backend or database.
+- Stored data is validated when it is read. Invalid JSON or records that do
+  not match the Kudos model are treated as invalid storage.
+- Stored Kudos are sorted newest first. Sorting is performed on a copy so the
+  loaded array is not mutated.
+- `localStorage` is read again before saving a new Kudos. This helps preserve
+  Kudos that may have been sent from another browser tab.
+- The visible feed and overview have not been implemented yet. The decisions
+  about an empty feed, the seven-day overview and overview sorting therefore
+  remain future work.
